@@ -28,7 +28,8 @@ urlpatterns = [
     path('course/', include('Core.urls')),
     path('calendar/', include('calendar.urls')),
     path('announcements/', include('Announcements.urls')),
-    path('verification/', include('verify_email.urls'))
+    path('verification/', include('verify_email.urls')),
+    path('message/', include('message.urls')),
 ]
 
 if settings.DEBUG:

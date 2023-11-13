@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'schedule',
     'Announcements',
     'verify_email.apps.VerifyEmailConfig',
+    'message',
 
 ]
 
