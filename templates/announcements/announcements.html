@@ -1,0 +1,39 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+  <h2>Announcements</h2>
+  {% if request.user.is_instructor %}
+    {% if announcements %}
+      <ul>
+        {% for announcement in announcements %}
+          <li>
+            <a href="{% url 'view_announcement' announcement.id %}" style="color: #3366cc;">
+              <strong>{{ announcement.title }}</strong>
+              <br>{{ announcement.content }}<br>
+              <small>{{ announcement.date_posted }}</small>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No announcements available.</p>
+    {% endif %}
+    <a href="{% url 'add_announcement' %}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; display: inline-block;">Add Announcement</a>
+  {% else %}
+    {% if announcements %}
+      <ul>
+        {% for announcement in announcements %}
+          <li>
+            <a href="{% url 'view_announcement' announcement.id %}" style="color: #3366cc;">
+              <strong>{{ announcement.title }}</strong>
+              <br>{{ announcement.content }}<br>
+              <small>{{ announcement.date_posted }}</small>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No announcements available.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

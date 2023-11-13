@@ -1,0 +1,17 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+  <h2>Announcement Details</h2>
+  <strong>{{ announcement.title }}</strong>
+  <p>{{ announcement.content }}</p>
+  <small>Posted on: {{ announcement.date_posted }}</small>
+  
+  <br><br>
+  <a href="{% url 'announcements' %}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; display: inline-block;">Back to Announcements</a>
+  {% if request.user.is_instructor %}
+  <a href="{% url 'delete_announcement' announcement.id %}" style="background-color: #ff3333; color: white; padding: 10px 20px; text-decoration: none; display: inline-block;">Delete</a>
+  <a href="{% url 'edit_announcement' announcement.id %}" style="background-color: #ff3333; color: white; padding: 10px 20px; text-decoration: none; display: inline-block;">Edit</a>
+  {% else %}
+
+  {% endif %}
+{% endblock %}

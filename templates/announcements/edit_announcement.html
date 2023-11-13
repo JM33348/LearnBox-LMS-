@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>{% extends 'nav.html' %}
+
+{% block content %}
+  <h2>Add Announcement</h2>
+
+  <form method="post" action="{% url 'edit_announcement' announcement.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Save</button>
+  </form>
+
+   <a href="{% url 'announcements' %}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; display: inline-block;">Back to Announcements</a>
+{% endblock %}
