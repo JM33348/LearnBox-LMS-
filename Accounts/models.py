@@ -9,7 +9,7 @@ from Learn_Box import settings
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, password=None, firstname=None, lastname=None, is_active=True
-                    , is_staff=False, is_admin=False, is_student=True, is_instructor=False):
+                    , is_staff=True, is_admin=True, is_student=False, is_instructor=False):
         if not email:
             raise ValueError("Users must have an email address")
         if not firstname:

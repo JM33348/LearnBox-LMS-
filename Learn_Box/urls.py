@@ -26,7 +26,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('accounts/', include('Accounts.urls')),
     path('course/', include('Core.urls')),
-    path('calendar/', include('calendar.urls')),
     path('announcements/', include('Announcements.urls')),
     path('verification/', include('verify_email.urls')),
     path('message/', include('message.urls')),
