@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import *
+from .views import UserListView, ConversationDetailView, send_message
 
 urlpatterns = [
-    # Add your other URL patterns here
-    path('conversation/', conversation, name='conversation'),
-    path('send_message/', send_message, name='send_message'),
+    path('user_list/', UserListView.as_view(), name='user_list'),
+    path('conversation_detail/<int:user_id>/', ConversationDetailView.as_view(), name='conversation_detail'),
+    path('send_message/<int:user_id>/', send_message, name='send_message'),
 ]

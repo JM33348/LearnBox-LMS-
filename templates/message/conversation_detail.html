@@ -1,0 +1,110 @@
+{% block content %}
+  <style>
+    .container {
+      position: relative;
+      margin-top: 80px; /* Adjust as needed */
+      padding-bottom: 80px; /* Adjust as needed */
+    }
+
+    .fixed-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #fff; /* Adjust the background color as needed */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    .conversation-header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 10px 0;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      cursor: pointer;
+    }
+
+    .message-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .message {
+      margin-bottom: 30px;
+    }
+
+    .sender-message {
+      text-align: right;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 10px;
+      padding: 8px;
+    }
+
+    .receiver-message {
+      text-align: left;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 8px;
+    }
+
+    .message-form {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #fff; /* Adjust the background color as needed */
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .send-button {
+      width: 18%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+
+  <div class="container mt-4">
+    <div id="fixed-header" class="fixed-header">
+      <a href="{% url 'user_list' %}" class="back-button">
+        <!-- Replace this with your arrow logo or icon -->
+        &larr; Back
+      </a>
+
+      <h2 class="conversation-header">Conversation with {{ other_user.email }}</h2>
+    </div>
+
+    <ul class="message-list">
+      {% for message in messages %}
+        <li class="message {% if message.sender == request.user %}sender-message{% else %}receiver-message{% endif %}">
+           {{ message.content }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <form method="post" action="{% url 'conversation_detail' other_user.id %}" class="message-form">
+      {% csrf_token %}
+      <textarea name="content"></textarea>
+      <input type="submit" value="Send" class="send-button">
+    </form>
+  </div>
+{% endblock %}

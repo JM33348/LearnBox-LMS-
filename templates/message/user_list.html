@@ -1,0 +1,59 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>User List</h2>
+    <form method="get" action="{% url 'user_list' %}" class="mb-3">
+      <div class="input-group">
+        <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search users">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+
+    <ul class="list-group">
+      {% for user in users %}
+        <li class="list-group-item">
+          <a href="{% url 'conversation_detail' user.id %}" class="user-link">{{ user.email }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <style>
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .input-group {
+      display: flex;
+    }
+
+    .form-control {
+      flex: 1;
+    }
+
+    .btn {
+      margin-left: 8px;
+    }
+
+    .list-group {
+      margin-top: 20px;
+    }
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      margin-bottom: 8px;
+    }
+
+    .user-link {
+      text-decoration: none;
+      color: #007bff;
+    }
+  </style>
+{% endblock %}
