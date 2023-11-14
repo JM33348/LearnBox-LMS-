@@ -144,5 +144,3 @@ EMAIL_HOST_USER = '101objor.cpe@gmail.com'
 EMAIL_HOST_PASSWORD = 'qugelblcwfslpaky'
 
 DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
-
-LOGIN_REDIRECT_URL = 'home'

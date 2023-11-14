@@ -2,26 +2,11 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout, get_user_model
 from .forms import RegistrationForm, AccountAuthenticationForm
 from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import get_user_model
 from verify_email.email_handler import send_verification_email
 
 User = get_user_model()
 
-def verify_email(request, token):
-    try:
-        # Assuming you have a User model with an 'email_verification_token' field
-        user = User.objects.get(email_verification_token=token, is_active=False)
-        user.is_active = True
-        user.email_verification_token = None  # You may want to clear the token after verification
-        user.save()
 
-        messages.success(request, 'Your email has been verified. You can now log in.')
-        return redirect('login')
-
-    except User.DoesNotExist:
-        messages.error(request, 'Invalid verification link.')
-        return redirect('login')
 
 def register_view(request, *args, **kwargs):
     user = request.user
