@@ -32,6 +32,7 @@ class MyAccountManager(BaseUserManager):
         user.is_instructor = is_instructor
         user.save(using=self._db)
         return user
+
     def create_staffuser(self, email, password):
         user = self.create_user(
             email,
@@ -40,7 +41,8 @@ class MyAccountManager(BaseUserManager):
             is_staff=True,
         )
         return user
-    def create_superuser(self, email, firstname,lastname, password):
+
+    def create_superuser(self, email, firstname, lastname, password):
         user = self.create_user(
             email,
             password=password,
@@ -57,8 +59,9 @@ def get_profile_image_filepath(self):
     return f'profile_images/{self.pk}/{"profile_image.png"}'
 
 
-# def get_default_profile_image():
-#     return "img/"the image itself""
+def get_default_profile_image():
+    return "img/Default.png"
+
 
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', unique=True)
@@ -71,22 +74,23 @@ class Account(AbstractBaseUser):
     is_instructor = models.BooleanField(default=False)
     is_student = models.BooleanField(default=True)
     profile_image = models.ImageField(upload_to=get_profile_image_filepath, null=True, blank=True)
-
+    email_verification_token = models.CharField(max_length=100, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['firstname', 'lastname']
     objects = MyAccountManager()
+
     def get_profile_image_filename(self):
         return str(self.profile_image)[str(self.profile_image).index(f'profile_images/{self.pk}/'):]
 
     def __str__(self):
         return self.email
+
     def has_perm(self, perm, obj=None):
         return True
 
     def has_module_perms(self, app_label):
         return True
-
 
     # @property
     # def is_active(self):

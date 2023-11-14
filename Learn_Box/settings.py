@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'Announcements',
     'verify_email.apps.VerifyEmailConfig',
     'message',
-
 ]
 
 MIDDLEWARE = [
@@ -76,6 +75,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'Learn_Box.wsgi.application'
 
@@ -144,3 +144,5 @@ EMAIL_HOST_USER = '101objor.cpe@gmail.com'
 EMAIL_HOST_PASSWORD = 'qugelblcwfslpaky'
 
 DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
+
+LOGIN_REDIRECT_URL = 'home'
