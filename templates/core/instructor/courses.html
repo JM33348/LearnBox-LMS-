@@ -15,19 +15,24 @@
           <div class="section-heading text-center">
 
 
-            <h3>{{ request.user.first_name }}'s Course/s</h3>
+            <h3>{{ request.user.firstname }}'s Course/s</h3>
             <div class="line"></div>
           </div>
         </div>
       </div>
 
-      <div class="row">
+
+
+    <div>
+    {% if request.user.is_authenticated and request.user.is_instructor %}
+        <div class="row">
+      <a href="{% url 'core:course-create' %}" style="color: black ; font-weight: bolder"> <small> CREATE COURSE </small></a> <br><br>
           {% for course in course %}
         <!-- Single Dentist Area -->
         <div class="col-12 col-sm-6 col-md-4">
 
           <div class="single-dentist-area mb-100">
-            <img  style="height: 300px; width: 500px " src="{{ course.course_image.url }}" alt="">
+            <img style="display: block; margin: 0 auto; height: 300px; width: 500px;" src="{{ course.course_image.url }}" alt="">
             <!-- Dentist Content -->
             <div class="dentist-content">
               <!-- Social Info -->
@@ -35,9 +40,9 @@
 
               </div>
               <!-- Dentist Info -->
-              <div class="dentist-info bg-gradient-overlay">
-                  <h5>{{ course.course_name }} |  <a href="{% url 'core:course-view' course.id %}"> <small>VIEW COURSE</small></a> </h5>
-                <p>{{ course.teacher_name }} </p>
+              <div class="dentist-info bg-gradient-overlay" style="font-size: x-large;">
+                  <h5>  <a href="{% url 'core:course-view' course.id %}" style="color: black; font-size: x-large ;" > <small>{{ course.course_name }} </small></a> </h5>
+{#                <p>{{ course.teacher_name }} </p>#}
 
 
               </div>
@@ -45,6 +50,35 @@
           </div>
         </div>
       {% endfor %}
+    {% else %}
+      <div class="row">
+
+          {% for course in course %}
+        <!-- Single Dentist Area -->
+        <div class="col-12 col-sm-6 col-md-4">
+
+          <div class="single-dentist-area mb-100">
+            <img style="display: block; margin: 0 auto; height: 300px; width: 500px;" src="{{ course.course_image.url }}" alt="">
+            <!-- Dentist Content -->
+            <div class="dentist-content">
+              <!-- Social Info -->
+              <div class="dentist-social-info">
+
+              </div>
+              <!-- Dentist Info -->
+              <div class="dentist-info bg-gradient-overlay" style="font-size: x-large;">
+                  <h5>  <a href="{% url 'core:course-view' course.id %}" style="color: black; font-size: x-large ;" > <small>{{ course.course_name }} </small></a> </h5>
+{#                <p>{{ course.teacher_name }} </p>#}
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% endif %}
 
       </div>
     </div>

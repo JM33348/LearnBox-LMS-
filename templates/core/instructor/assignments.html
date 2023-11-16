@@ -8,7 +8,7 @@
     <div class="container">
 
         <div class="col-12 col-sm-6 col-md-10">
-            {% if request.user.is_authenticated and request.user.role == 'instructor' %}
+            {% if request.user.is_authenticated and request.user.is_instructor %}
                 {% for foo in assignment %}
                     <h3><strong> {{ foo.title }}  </strong></h3>
                     <hr/>
@@ -19,12 +19,12 @@
                     <p> <h4>Time</h4> {{ foo.duration }} hours </p>
 
                     <a href="{% url 'core:delete-assignment' foo.id %}">Delete Assignment</a>
+                    <a href="{% url 'core:assignment-submission-list' %}">View Submissions</a>
 
                 {% endfor %}
                 <hr/>
 
 
-                <h4><a href="{% url 'core:assignment-create' %}">Create a Assignment</a></h4>
 
 
             {% else %}
@@ -38,7 +38,8 @@
                     <p> <h4>Marks</h4> {{ foo.marks }} </p>
 
                     <p> <h4>Time</h4> {{ foo.duration }} hours </p>
-                          <br/>
+                    <br>
+
                       <h4><a href="{% url 'core:assignment-submission' %}">Submit Assignment</a></h4>
                   <hr/>
                 {% endfor %}

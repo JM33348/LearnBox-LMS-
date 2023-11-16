@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Box</title>
+    <title>Navbar Example</title>
     <style>
         body {
             margin: 0;
@@ -46,8 +46,9 @@
 
     <nav>
         <ul>
-            <li><a href="{% url 'profile' user_id=request.user.id user_id=user.id %}">Profile</a></li>
+            <li><a href="#">Profile</a></li>
             <li><a href="#">Dashboard</a></li>
+            <li><a href="{% url 'core:course-view' %}">Course</a></li>
             <li><a href="#">Calendar</a></li>
             <li><a href="{% url 'user_list' %}">Inbox</a></li>
             <li><a href="{% url 'announcements' %}">Announcement</a></li>

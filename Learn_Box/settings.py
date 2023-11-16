@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'Announcements',
     'verify_email.apps.VerifyEmailConfig',
     'message',
+    'Calendar',
+
 ]
 
 MIDDLEWARE = [

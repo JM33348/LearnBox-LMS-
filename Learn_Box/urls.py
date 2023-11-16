@@ -29,6 +29,8 @@ urlpatterns = [
     path('announcements/', include('Announcements.urls')),
     path('verification/', include('verify_email.urls')),
     path('message/', include('message.urls')),
+    path('calendar/', include('Calendar.urls'))
+
 ]
 
 if settings.DEBUG:
