@@ -66,14 +66,24 @@ class CourseCreateForm(forms.ModelForm):
 class AssignmentCreateForm(forms.ModelForm):
     class Meta:
         model = Assignment
-        fields = ['title', 'content', 'marks', 'duration']
+        fields = ['title', 'content', 'marks', 'duration', 'course']
+        widgets = {
+            'duration': forms.DateInput(attrs={'type': 'date'})
+        }
 
     def __init__(self, *args, **kwargs):
         super(AssignmentCreateForm, self).__init__(*args, **kwargs)
+        self.fields['course'].label = "Course"
         self.fields['title'].label = "Assignment Name"
         self.fields['content'].label = "Content"
         self.fields['marks'].label = "Marks"
         self.fields['duration'].label = "Duration"
+
+        self.fields['course'].widget.attrs.update(
+            {
+                'placeholder': 'Select Course',
+            }
+        )
 
         self.fields['title'].widget.attrs.update(
             {
@@ -99,6 +109,7 @@ class AssignmentCreateForm(forms.ModelForm):
             }
         )
 
+
     def is_valid(self):
         valid = super(AssignmentCreateForm, self).is_valid()
 
@@ -119,6 +130,7 @@ class AssignmentSubmissionForm(forms.ModelForm):
     class Meta:
         model = AssignmentSubmission
         fields = ['name', 'university_id', 'content', 'file']
+
 
     def __init__(self, *args, **kwargs):
         super(AssignmentSubmissionForm, self).__init__(*args, **kwargs)

@@ -3,7 +3,6 @@ from django.views.generic import TemplateView, CreateView, ListView, DeleteView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-
 from .forms import CourseCreateForm, AssignmentCreateForm, AssignmentSubmissionForm
 from .models import Course, Assignment, AssignmentSubmission
 
@@ -68,9 +67,9 @@ class AssignmentCreateView(CreateView):
     @method_decorator(login_required(login_url=reverse_lazy('login')))
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_authenticated:
-            return redirect(reverse_lazy('authentication:login'))
+            return redirect(reverse_lazy('login'))
         if self.request.user.is_authenticated and not self.request.user.is_instructor:
-            return redirect(reverse_lazy('authentication:login'))
+            return redirect(reverse_lazy('login'))
         return super().dispatch(self.request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -108,7 +107,7 @@ class AssignmentSubmissionView(CreateView):
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect(reverse_lazy('login'))
-        if self.request.user.is_authenticated and self.request.user.role != 'student':
+        if self.request.user.is_authenticated and self.request.user.is_student:
             return redirect(reverse_lazy('login'))
         return super().dispatch(self.request, *args, **kwargs)
 
