@@ -7,7 +7,7 @@ User = get_user_model()
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
-    content = models.TextField()
+    content = models.TextField(blank=False, null=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

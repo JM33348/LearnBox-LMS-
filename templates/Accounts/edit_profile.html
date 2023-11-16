@@ -1,0 +1,67 @@
+{#{% extends 'base.html' %}#}
+<!-- profile.html and edit_profile.html -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 20px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        .edit-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+{% load static %}
+{% block content %}
+   <h1>Edit Profile</h1>
+
+    {% if account.profile_image %}
+        <img src="{{ account.profile_image.url }}" alt="Profile Image" class="profile-image">
+    {% else %}
+        <img src="{% static 'icon/default_profile_image.jpg' %}" alt="Default Profile Image" class="profile-image">
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+{% endblock %}

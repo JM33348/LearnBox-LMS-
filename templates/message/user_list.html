@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="container mt-4">
-    <h2>User List</h2>
+    <h2>People you might want to chat with</h2>
     <form method="get" action="{% url 'user_list' %}" class="mb-3">
       <div class="input-group">
         <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search users">
@@ -17,9 +17,25 @@
         </li>
       {% endfor %}
     </ul>
+
+    <!-- Scroll Down Button -->
+    <button onclick="scrollDown()" class="btn btn-secondary mt-3">Scroll Down</button>
   </div>
 
+  <script>
+    function scrollDown() {
+      // Adjust the scroll speed as needed
+      window.scrollBy({
+        top: window.innerHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+
   <style>
+    /* Your existing styles remain unchanged */
+
     .container {
       max-width: 600px;
       margin: auto;

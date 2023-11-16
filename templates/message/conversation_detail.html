@@ -1,5 +1,8 @@
+{% load static %}
 {% block content %}
   <style>
+    /* Your existing styles remain unchanged */
+
     .container {
       position: relative;
       margin-top: 80px; /* Adjust as needed */
@@ -26,6 +29,11 @@
       top: 10px;
       left: 10px;
       cursor: pointer;
+    }
+
+    .back-logo {
+      width: 30px; /* Adjust the width as needed */
+      height: auto; /* Maintain aspect ratio */
     }
 
     .message-list {
@@ -85,12 +93,11 @@
 
   <div class="container mt-4">
     <div id="fixed-header" class="fixed-header">
-      <a href="{% url 'user_list' %}" class="back-button">
-        <!-- Replace this with your arrow logo or icon -->
-        &larr; Back
-      </a>
+        <a href="{% url 'user_list' %}" class="back-button">
+            <img src="{% static 'icon/back_icon.png' %}" alt="Back" class="back-logo">
+        </a>
 
-      <h2 class="conversation-header">Conversation with {{ other_user.email }}</h2>
+      <h2 class="conversation-header">Conversation with <a href="{% url 'profile' other_user.id %}">{{ other_user.email }}</a></h2>
     </div>
 
     <ul class="message-list">

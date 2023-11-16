@@ -38,3 +38,10 @@ class AccountAuthenticationForm(forms.ModelForm):
             password = self.cleaned_data['password']
             if not authenticate(email=email, password=password):
                 raise forms.ValidationError("Invalid login")
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ['firstname', 'lastname', 'profile_image']
+
+    profile_image = forms.FileField(required=False)  # Set 'required=False' for the file field

@@ -55,12 +55,13 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
-def get_profile_image_filepath(self):
-    return f'profile_images/{self.pk}/{"profile_image.png"}'
+def get_profile_image_filename(instance, filename):
+    return f"profile_images/{instance.pk}/profile_image_{filename}"
 
 
 def get_default_profile_image():
-    return "img/Default.png"
+    return 'icon/default_profile_image.jpg'
+
 
 
 class Account(AbstractBaseUser):
@@ -73,15 +74,13 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_instructor = models.BooleanField(default=False)
     is_student = models.BooleanField(default=True)
-    profile_image = models.ImageField(upload_to=get_profile_image_filepath, null=True, blank=True)
+    profile_image = models.ImageField(upload_to=get_profile_image_filename, null=True, blank=True, default=get_default_profile_image)
     email_verification_token = models.CharField(max_length=100, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['firstname', 'lastname']
     objects = MyAccountManager()
 
-    def get_profile_image_filename(self):
-        return str(self.profile_image)[str(self.profile_image).index(f'profile_images/{self.pk}/'):]
 
     def __str__(self):
         return self.email
@@ -92,9 +91,6 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-    # @property
-    # def is_active(self):
-    #     return self.is_active
 
     @property
     def is_staff(self):

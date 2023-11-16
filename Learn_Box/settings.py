@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 
@@ -142,3 +142,5 @@ EMAIL_HOST_USER = '101objor.cpe@gmail.com'
 EMAIL_HOST_PASSWORD = 'qugelblcwfslpaky'
 
 DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
+
+BASE_URL = "http://127.0.0.1:8000"

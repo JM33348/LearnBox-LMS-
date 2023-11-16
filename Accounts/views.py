@@ -1,8 +1,12 @@
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout, get_user_model
-from .forms import RegistrationForm, AccountAuthenticationForm
-from django.shortcuts import render, redirect
+from .forms import RegistrationForm, AccountAuthenticationForm, EditProfileForm
+from django.shortcuts import render, redirect, get_object_or_404
 from verify_email.email_handler import send_verification_email
+from Accounts.models import Account
+from django.conf import settings
+from django.contrib import messages
+
 
 User = get_user_model()
 
@@ -65,3 +69,49 @@ def get_redirect_if_exists(request):
         if request.GET.get("next"):
             redirect = str(request.GET.get("next"))
     return redirect
+
+
+def profile_view(request, *args, **kwargs):
+    context = {}
+    user_id = kwargs.get("user_id")
+    try:
+        account = Account.objects.get(pk=user_id)
+    except Account.DoesNotExist:
+        return HttpResponse("Something went wrong.")
+    if account:
+        context['id'] = account.id
+        context['firstname'] = account.firstname
+        context['lastname'] = account.lastname
+        context['email'] = account.email
+        context['profile_image'] = account.profile_image.url
+        context['is_owner'] = request.user == account
+
+        # Define template variables
+        is_self = True
+        is_friend = False
+        user = request.user
+        if user.is_authenticated and user != account:
+            is_self = False
+        elif not user.is_authenticated:
+            is_self = False
+
+        # Set the template variables to the values
+        context['is_self'] = is_self
+        context['is_friend'] = is_friend
+        context['BASE_URL'] = settings.BASE_URL
+        return render(request, "Accounts/profile.html", context)
+
+def edit_profile(request, user_id):
+    # Fetch the Account instance based on user_id
+    account = get_object_or_404(Account, pk=user_id)
+
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES, instance=account)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile has been updated successfully.')
+            return redirect('profile', user_id=account.id)
+    else:
+        form = EditProfileForm(instance=account)
+
+    return render(request, 'Accounts/edit_profile.html', {'form': form, 'account': account})
