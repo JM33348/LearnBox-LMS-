@@ -18,17 +18,13 @@
 
                     <p> <h4>Time</h4> {{ foo.duration }} hours </p>
 
-                    <a href="{% url 'core:delete-assignment' foo.id %}">Delete Assignment</a>
-                    <a href="{% url 'core:assignment-submission-list' %}">View Submissions</a>
+                    <a href="{% url 'core:delete-assignment' foo.id %}" style="color: black;">Delete Assignment</a>
+                    <a href="{% url 'core:assignment-submission-list' %}" style="color: black;">View Submissions</a>
 
                 {% endfor %}
                 <hr/>
 
-
-
-
             {% else %}
-
 
                 {% for foo in assignment %}
                     <h3><strong> {{ foo.title }}  </strong></h3>
@@ -40,11 +36,10 @@
                     <p> <h4>Time</h4> {{ foo.duration }} hours </p>
                     <br>
 
-                      <h4><a href="{% url 'core:assignment-submission' %}">Submit Assignment</a></h4>
+                    <a href="{% url 'core:assignment-submission' %}" style="color: black;">Submit Assignment</a>
                   <hr/>
                 {% endfor %}
                 <hr/>
-
 
             {% endif %}
             <br/>

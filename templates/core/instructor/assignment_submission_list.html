@@ -6,7 +6,6 @@
 {% block content %}
 
     <div class="container">
-
         <div class="col-12 col-sm-6 col-md-10">
                     <strong><h3>Assignments</h3></strong>
         <hr/>
@@ -20,7 +19,7 @@
                 <p> <h4>Answer</h4> {{ foo.content }}  </p>
 
                 <br/>
-                <a href="{% url 'core:assignment-submission-delete' foo.id %}">Delete Assignment</a>
+                <a href="{% url 'core:assignment-submission-delete' foo.id %}" style="color: black;">Delete Assignment</a>
                   <hr/>
             {% endfor %}
 

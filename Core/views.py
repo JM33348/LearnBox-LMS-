@@ -87,7 +87,10 @@ class AssignmentView(ListView):
         return super().dispatch(self.request, *args, **kwargs)
 
     def get_queryset(self):
-        return self.model.objects.all()
+        # return self.model.objects.all()
+        course_id = self.kwargs.get('course_id')  # Adjust based on your URL structure
+    # Filter assignments based on the course
+        return self.model.objects.filter(course_id=course_id)
 
 
 class AssignmentDeleteView(DeleteView):
@@ -101,13 +104,13 @@ class AssignmentSubmissionView(CreateView):
     extra_context = {
         'title': 'New Exam'
     }
-    success_url = reverse_lazy('core:home')
+    success_url = reverse_lazy('core:course-view')
 
     @method_decorator(login_required(login_url=reverse_lazy('login')))
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect(reverse_lazy('login'))
-        if self.request.user.is_authenticated and self.request.user.is_student:
+        if self.request.user.is_authenticated and self.request.user.is_instructor:
             return redirect(reverse_lazy('login'))
         return super().dispatch(self.request, *args, **kwargs)
 
