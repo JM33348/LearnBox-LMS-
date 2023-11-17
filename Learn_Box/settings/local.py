@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'verify_email.apps.VerifyEmailConfig',
     'message',
     'Calendar',
+    'custom_admin',
 
 ]
 
