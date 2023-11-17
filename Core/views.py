@@ -59,10 +59,12 @@ def course_single(request, id):
 class AssignmentCreateView(CreateView):
     template_name = 'core/instructor/assignment_create.html'
     form_class = AssignmentCreateForm
+    # course_id = form.cleaned_data.get('course_id')  # Adjust this based on your form field name
     extra_context = {
         'title': 'New Course'
     }
-    success_url = reverse_lazy('core:assignment-list')
+    # success_url = reverse_lazy('core:course-view')
+    success_url = reverse_lazy('core:course')
 
     @method_decorator(login_required(login_url=reverse_lazy('login')))
     def dispatch(self, request, *args, **kwargs):
@@ -95,7 +97,7 @@ class AssignmentView(ListView):
 
 class AssignmentDeleteView(DeleteView):
     model = Assignment
-    success_url = reverse_lazy('core:assignment-list')
+    success_url = reverse_lazy('core:course')
 
 
 class AssignmentSubmissionView(CreateView):
