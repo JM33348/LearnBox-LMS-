@@ -106,7 +106,7 @@ class AssignmentSubmissionView(CreateView):
     extra_context = {
         'title': 'New Exam'
     }
-    success_url = reverse_lazy('core:course-view')
+    success_url = reverse_lazy('core:course')
 
     @method_decorator(login_required(login_url=reverse_lazy('login')))
     def dispatch(self, request, *args, **kwargs):
