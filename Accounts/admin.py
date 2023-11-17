@@ -13,4 +13,7 @@ class AccountAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
 
+    def __str__(self):
+        return self.email
+
 admin.site.register(Account, AccountAdmin)
