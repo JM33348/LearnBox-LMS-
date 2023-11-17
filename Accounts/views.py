@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import login, authenticate, logout, get_user_model
 from .forms import RegistrationForm, AccountAuthenticationForm, EditProfileForm
 from django.shortcuts import render, redirect, get_object_or_404
@@ -104,6 +104,10 @@ def profile_view(request, *args, **kwargs):
 def edit_profile(request, user_id):
     # Fetch the Account instance based on user_id
     account = get_object_or_404(Account, pk=user_id)
+
+    # Check if the current user is the owner of the profile
+    if request.user != account:
+        return HttpResponseForbidden("You do not have permission to edit this profile.")
 
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=account)

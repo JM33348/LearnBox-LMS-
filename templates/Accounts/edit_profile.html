@@ -46,12 +46,29 @@
             margin-top: 20px;
             display: inline-block;
         }
+        .back-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 35px;
+            left: 200px;
+        }
+
+        .back-logo {
+            width: 30px;
+            height: auto;
+        }
     </style>
 </head>
 
 {% load static %}
 {% block content %}
    <h1>Edit Profile</h1>
+
+    <a href="{% url 'profile' user_id=request.user.id user_id=user.id %}" class="back-button">
+        <img src="{% static 'icon/back_icon.png' %}" alt="Back" class="back-logo">
+    </a>
 
     {% if account.profile_image %}
         <img src="{{ account.profile_image.url }}" alt="Profile Image" class="profile-image">

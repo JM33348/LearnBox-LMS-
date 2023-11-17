@@ -2,11 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 from Learn_Box import settings
-
-
-# create a new user
-# create a superuser
-
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, password=None, firstname=None, lastname=None, is_active=True
                     , is_staff=True, is_admin=True, is_student=False, is_instructor=False):
@@ -60,7 +55,7 @@ def get_profile_image_filename(instance, filename):
 
 
 def get_default_profile_image():
-    return 'icon/default_profile_image.jpg'
+    return 'img/default_profile_image.jpg'
 
 
 
