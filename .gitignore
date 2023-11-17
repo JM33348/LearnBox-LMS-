@@ -6,7 +6,7 @@ include/
 pip-selfcheck.json
 
 # Django related
-test202/settings/local.py
+Learn_Box/settings/local.py
 # src/<yourproject>/settings/local.py
 # static-cdn/  # any collected static files
 
