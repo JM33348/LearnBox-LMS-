@@ -44,4 +44,11 @@ class EditProfileForm(forms.ModelForm):
         model = Account
         fields = ['firstname', 'lastname', 'profile_image']
 
-    profile_image = forms.FileField(required=False)  # Set 'required=False' for the file field
+    profile_image = forms.FileField(required=False)
+
+    def clean_profile_image(self):
+        profile_image = self.cleaned_data.get('profile_image')
+        if not profile_image:
+            # If the profile image is cleared, set it to the default image
+            return Account._meta.get_field('profile_image').get_default()
+        return profile_image
