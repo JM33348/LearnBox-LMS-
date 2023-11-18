@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'message',
     'Calendar',
     'custom_admin',
+    'storages',
 
 ]
 
@@ -131,6 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
+
+from Learn_Box.aws.utils import *
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

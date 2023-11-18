@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'message',
     'Calendar',
     'custom_admin',
+    'storages',
 ]
 
 MIDDLEWARE = [

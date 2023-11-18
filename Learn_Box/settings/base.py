@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'message',
     'Calendar',
     'custom_admin',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -156,3 +157,8 @@ CSRF_COOKIE_SECURE              = False
 SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
+
+AWS_GROUP_NAME = 'CPE_User_Group'
+AWS_USERNAME = 'Zhuske'
+AWS_ACCESS_KEY_ID = 'AKIA2CPW4HPQIEN26J3Z'
+AWS_SECRET_KEY = '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'
