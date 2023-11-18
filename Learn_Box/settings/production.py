@@ -22,9 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = 'django-insecure-b()u(e-l*v$4d440mx=)wt^r$0ijdi4wny-au2!h63%9y4iy)z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', 'learn-box1-4b48f27e21e2.herokuapp.com']
+
 
 AUTH_USER_MODEL = 'Accounts.Account'
 
@@ -90,6 +91,11 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -132,8 +138,6 @@ MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
 
-# from Learn_Box.aws.conf import *
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -148,8 +152,9 @@ EMAIL_HOST_PASSWORD = 'qugelblcwfslpaky'
 
 DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
 
-# BASE_URL = "http://127.0.0.1:8000"
-#
+BASE_URL = "http://127.0.0.1:8000"
+
+
 CORS_REPLACE_HTTPS_REFERER      = True
 HOST_SCHEME                     = "https://"
 SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -159,9 +164,3 @@ CSRF_COOKIE_SECURE              = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
 SECURE_HSTS_SECONDS             = 1000000
 SECURE_FRAME_DENY               = True
-
-# AWS_GROUP_NAME = 'CPE_User_Group'
-# AWS_USERNAME = 'Zhuske'
-# AWS_ACCESS_KEY_ID = 'AKIA2CPW4HPQIEN26J3Z'
-# AWS_SECRET_KEY = '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'
-
