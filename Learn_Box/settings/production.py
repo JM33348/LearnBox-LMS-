@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-b()u(e-l*v$4d440mx=)wt^r$0ijdi4wny-au2!h63%9y4iy)z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', 'learnbox2-c3dbbbd65aed.herokuapp.com']
 
 AUTH_USER_MODEL = 'Accounts.Account'
 
