@@ -47,9 +47,8 @@
     <nav>
         <ul>
             <li><a href="{% url 'profile' user_id=request.user.id user_id=user.id %}">Profile</a></li>
-            <li><a href="#">Dashboard</a></li>
             <li><a href="{% url 'core:course' %}">Course</a></li>
-            <li><a href="#">Calendar</a></li>
+{#            <li><a href="{% url 'calendar:index' %}">Calendar</a></li>#}
             <li><a href="{% url 'user_list' %}">Inbox</a></li>
             <li><a href="{% url 'announcements' %}">Announcement</a></li>
             <li style="float: right;"><a href="{% url 'logout' %}">Logout</a></li>

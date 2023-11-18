@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'Calendar',
     'custom_admin',
     'storages',
-
 ]
 
 MIDDLEWARE = [
@@ -133,7 +132,7 @@ MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
 
-from Learn_Box.aws.utils import *
+from Learn_Box.aws.conf import *
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -160,3 +159,8 @@ CSRF_COOKIE_SECURE              = False
 SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
+
+# AWS_GROUP_NAME = 'CPE_User_Group'
+# AWS_USERNAME = 'Zhuske'
+# AWS_ACCESS_KEY_ID = 'AKIA2CPW4HPQIEN26J3Z'
+# AWS_SECRET_KEY = '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'
